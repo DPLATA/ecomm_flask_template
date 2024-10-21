@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>ALL ORDERS</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ORDER ID</th>
+            <th>USER</th>
+            <th>STATUS</th>
+            <th>TOTATL PRICE</th>
+            <th>CREATED AT</th>
+            <th>ACTIONS</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.username }} ({{ order.email }})</td>
+            <td>{{ order.status }}</td>
+            <td>${{ "%.2f"|format(order.total_price) }}</td>
+            <td>{{ order.created_at }}</td>
+            <td><a href="{{ url_for('admin.order_details', order_id=order.id) }}">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

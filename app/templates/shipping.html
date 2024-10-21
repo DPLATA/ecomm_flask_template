@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}SHIPPING INFO{% endblock %}
+
+{% block content %}
+<h1>SHIPPING INFO</h1>
+
+<form method="POST" action="{{ url_for('main.shipping', product_id=product_id) }}">
+    <div>
+        <label for="name">NAME:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="address">ADDRESS:</label>
+        <input type="text" id="address" name="address" required>
+    </div>
+    <div>
+        <label for="city">CITY:</label>
+        <input type="text" id="city" name="city" required>
+    </div>
+    <div>
+        <label for="country">STATE:</label>
+        <input type="text" id="country" name="country" required>
+    </div>
+    <div>
+        <label for="zip">ZIP CODE:</label>
+        <input type="text" id="zip" name="zip" required>
+    </div>
+    <button type="submit">PROCEED TO PAYMENT</button>
+</form>
+{% endblock %}

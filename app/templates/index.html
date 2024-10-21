@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}ECOMM WELCOME{% endblock %}
+
+{% block content %}
+<section>
+    <div>
+        <h1>NAME</h1>
+        <p>SOME TEXT</p>
+        <a href="{{ url_for('main.product_list') }}" class="cta-button">START SHOPPING</a>
+    </div>
+</section>
+{% endblock %}

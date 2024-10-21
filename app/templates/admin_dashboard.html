@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>ADMIN DASHBOARD</h1>
+<nav>
+    <ul>
+        <li><a href="{{ url_for('admin.view_orders') }}">VIEW ORDERS</a></li>
+    </ul>
+</nav>
+{% endblock %}

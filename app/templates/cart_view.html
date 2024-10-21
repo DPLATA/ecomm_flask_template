@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>CART</h1>
+
+{% if cart_items %}
+    <table>
+        <thead>
+            <tr>
+                <th>PRODUCT</th>
+                <th>PRICE</th>
+                <th>QUANTITY</th>
+                <th>TOTAL</th>
+                <th>ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td data-label="Product">
+                    <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}">
+                    {{ item.product.name }}
+                </td>
+                <td data-label="Price">${{ "%.2f"|format(item.product.price) }}</td>
+                <td data-label="Quantity">
+                    <form action="{{ url_for('cart.update_cart', product_id=item.product.id) }}" method="post">
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" required>
+                        <button type="submit">UPDATE</button>
+                    </form>
+                </td>
+                <td data-label="Total">${{ "%.2f"|format(item.total) }}</td>
+                <td data-label="Actions">
+                    <a href="{{ url_for('cart.remove_from_cart', product_id=item.product.id) }}">REMOVE</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>TOTAL: ${{ "%.2f"|format(total) }}</p>
+
+    <div>
+        <a href="{{ url_for('cart.clear_cart') }}">REMOVE ALL</a>
+        <a href="{{ url_for('orders.create_checkout_session') }}">PROCEED TO CHECKOUT</a>
+    </div>
+{% else %}
+    <p>CART IS EMPTY.</p>
+{% endif %}
+
+<a href="{{ url_for('main.product_list') }}">CONTINUE SHOPPING</a>
+{% endblock %}

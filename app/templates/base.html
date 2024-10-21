@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NAME{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('main.index') }}">HOME</a></li>
+                    <li><a href="{{ url_for('main.product_list') }}">PRODUCTS</a></li>
+                    {% if 'user_id' in session %}
+                        <li><a href="{{ url_for('auth.dashboard') }}">DASHBOARD</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">LOGOUT</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">LOGIN</a></li>
+                        <li><a href="{{ url_for('auth.register') }}">REGISTER</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('cart.view_cart') }}">SHOPPING CART({{ session['cart']|cart_count }})</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div>
+            <p>&copy; 2024. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,3 @@
+import stripe
+
+stripe = stripe

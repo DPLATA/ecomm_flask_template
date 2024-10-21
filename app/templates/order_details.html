@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}ORDER DETAILS{% endblock %}
+{% block content %}
+
+<h1>ORDER DETAILS</h1>
+
+<div>
+    <h2>THANKS FOR SHOPPING!</h2>
+    <p><strong>ORDER:</strong> {{ order_number }}</p>
+    <p><strong>PRODUCT:</strong> {{ product.name }}</p>
+    <p><strong>DESCRIPTION:</strong> {{ product.description }}</p>
+    <p><strong>PRICE:</strong> ${{ "%.2f"|format(product.price) }}</p>
+    <p><strong>QTY:</strong> 1</p>
+    <p><strong>TOTAL:</strong> ${{ "%.2f"|format(product.price) }}</p>
+</div>
+
+<div>
+    <a href="{{ url_for('main.product_list') }}">CONTINUE SHOPPING</a>
+</div>
+
+{% endblock %}

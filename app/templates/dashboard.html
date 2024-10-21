@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>WELCOME, {{ session['username'] }}!</h1>
+
+<h2>ORDERS</h2>
+{% if orders %}
+    <table>
+        <thead>
+            <tr>
+                <th>ORDER</th>
+                <th>DATE</th>
+                <th>TOTAL</th>
+                <th>STATUS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td data-label="Order ID">{{ order.id }}</td>
+                <td data-label="Date">{{ order.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td data-label="Total">${{ "%.2f"|format(order.total_price) }}</td>
+                <td data-label="Status">{{ order.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>NO PREVIOUS ORDERS.</p>
+{% endif %}
+
+<a href="{{ url_for('main.product_list') }}">START SHOPPING</a>
+{% endblock %}
